@@ -84,7 +84,7 @@ del newpass, masterconfig, secret, des, padlength
 
 filesToUpdate = {}
 
-rds = glob.glob(os.path.expanduser("~/.remmina") + "/*.remmina")
+rds = glob.glob(os.path.expanduser("~/.remmina/*.remmina"))
 for rd in rds:
     remmfile = ConfigParser.ConfigParser()
     remmfile.read(rd)
@@ -117,7 +117,7 @@ if savePass:
             for host in filesToUpdate:
                 cfgparse = ConfigParser.RawConfigParser(allow_no_value=True)
                 cfgparse.read(filesToUpdate[host])
-                cfgparse.set("remmina", "password", cryptedpass64)
+                cfgparse.set("remmina", "password", cryptedpass)
                 with open(filesToUpdate[host], "w") as cfgwrite:
                     cfgparse.write(EqualsSpaceRemover(cfgwrite))
                 print "Updated password for {}".format(host)
